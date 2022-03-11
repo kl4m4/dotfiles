@@ -15,5 +15,8 @@ set backspace=indent,eol,start
 " into definition, and put in last register
 command! Copydefinition :norm Ypf;xa {    0a}Vkkkd
 
-" Line number/column in status bar"
+" Line number/column in status bar
 set ruler
+
+" Skrót do przeglądania buforów
+:nnoremap <F5> :buffers<CR>:buffer<Space>
