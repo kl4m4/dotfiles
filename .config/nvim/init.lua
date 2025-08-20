@@ -8,6 +8,8 @@ vim.pack.add({
 	"https://github.com/echasnovski/mini.nvim",
 	"https://github.com/MeanderingProgrammer/render-markdown.nvim",
 	"https://github.com/akinsho/toggleterm.nvim",
+    "https://github.com/mason-org/mason.nvim",
+    "https://github.com/lewis6991/gitsigns.nvim",
 })
 
 vim.o.background = "dark" -- or "light" for light mode
@@ -20,6 +22,7 @@ vim.o.smartcase = true
 vim.o.hlsearch = false
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
+vim.o.expandtab = true
 vim.o.autoindent = true
 vim.o.showmode = false
 vim.o.termguicolors = true
@@ -28,12 +31,12 @@ vim.o.timeoutlen = 300
 vim.o.signcolumn = 'yes'
 vim.o.ignorecase = true
 vim.o.winborder = "rounded"
+vim.o.scrolloff = 8
 vim.g.mapleader = ' '
 
-vim.lsp.enable({'pyright', 'lua_ls', 'luals', 'clangd'})
+vim.lsp.enable({'pylsp', 'lua_ls', 'luals', 'clangd'})
 
---require('neoscroll').setup()
-require('toggleterm').setup()
+require('toggleterm').setup({open_mapping = {[[<c-\>]], [[<c-`>]]}})
 require('lazydev').setup()
 require('render-markdown').setup()
 require('mini.basics').setup()
@@ -46,7 +49,8 @@ require('mini.pairs').setup()
 require('mini.files').setup()
 require('mini.extra').setup()
 require('mini.pick').setup()
-
+require("mason").setup()
+require('gitsigns').setup()
 
 local lsp_pickers = {
   gr = 'references',
@@ -67,8 +71,9 @@ vim.keymap.set('n', '<leader>e', MiniFiles.open)
 vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep)
 vim.keymap.set('n', '<leader>fb', MiniPick.builtin.buffers)
 vim.keymap.set('n', '<leader>fh', MiniPick.builtin.help)
-
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
 vim.keymap.set('n', 'gh', vim.lsp.buf.hover )
+vim.keymap.set('n', '<Tab>', ':bn<CR>' )
+vim.keymap.set('n', '<S-Tab>', ':bp<CR>' )
 vim.keymap.set('i', '<C-Space>', '<C-x><C-o>', { noremap = true, silent = true })
-
 vim.keymap.set('t', '<esc>', '<C-\\><C-N>')
